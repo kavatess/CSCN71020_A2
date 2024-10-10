@@ -17,43 +17,43 @@ void main() {
 
 		switch (menuInput)
 		{
-			case 1:
-			{
-				printf("\nThe Rectangle has a length of %i and a width of %i\n\n", length, width);
-				break;
-			}
-			case 2:
-			{
-				int input = getIntInput("Please enter the length of the rectangle:");
-				setLength(input, &length);
-				break;
-			}
-			case 3:
-			{
-				int input = getIntInput("Please enter the width of the rectangle:");
-				setWidth(input, &width);
-				break;
-			}
-			case 4:
-			{
-				printf("\nThe Rectangle has a perimeter of %i\n\n", getPerimeter(&length, &width));
-				break;
-			}
-			case 5:
-			{
-				printf("\nThe Rectangle has an area of %i\n\n", getArea(&length, &width));
-				break;
-			}
-			case 6:
-			{
-				continueProgram = false;
-				break;
-			}
-			default:
-			{
-				printf("\nInvalid value entered.\n\n");
-				break;
-			}
+		case 1:
+		{
+			printf("\nThe Rectangle has a length of %i and a width of %i\n\n", length, width);
+			break;
+		}
+		case 2:
+		{
+			int input = getIntInput("Please enter the length of the rectangle:");
+			setLength(input, &length);
+			break;
+		}
+		case 3:
+		{
+			int input = getIntInput("Please enter the width of the rectangle:");
+			setWidth(input, &width);
+			break;
+		}
+		case 4:
+		{
+			printf("\nThe Rectangle has a perimeter of %i\n\n", getPerimeter(&length, &width));
+			break;
+		}
+		case 5:
+		{
+			printf("\nThe Rectangle has an area of %i\n\n", getArea(&length, &width));
+			break;
+		}
+		case 6:
+		{
+			continueProgram = false;
+			break;
+		}
+		default:
+		{
+			printf("\nInvalid value entered.\n\n");
+			break;
+		}
 		}
 	}
 }
@@ -70,20 +70,32 @@ int getIntInput(char message[]) {
 	return input;
 }
 
+// Fixed the condition of setLength function
 void setLength(int input, int *length) {
-	if (input >= 0 && input < 100) {
+	// The condition accepted 0 as a valid input, which is incorrect
+	// if (input >= 0 && input < 100) {
+	// Fix by removing the equal 0 condition
+	if (input > 0 && input < 100) {
 		*length = input;
 	}
 }
 
+// Fixed the condition of setLength function
 void setWidth(int input, int *width) {
-	if (input > 0 && input <= 100) {
+	// The condition accepted 100 as a valid input, which is incorrect
+	// if (input > 0 && input <= 100) {
+	// Fix by removing the equal 100 condition
+	if (input > 0 && input < 100) {
 		*width = input;
 	}
 }
 
+// Fixed the calculation for the perimeter
 int getPerimeter(int *length, int *width) {
-	int perimeter = *length + *length + *width;
+	// The perimeter calculation is wrong, because the width is only added one time
+	// int perimeter = *length + *length + *width;
+	// Fix by multiplying width by 2
+	int perimeter = 2 * (*length) + 2 * (*width);
 	return perimeter;
 }
 
